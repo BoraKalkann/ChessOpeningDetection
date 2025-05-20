@@ -1,12 +1,14 @@
 import cv2
 import numpy as np
 from ultralytics import YOLO
+from openings import openings
 
 # YOLOv8 modelini yükle
 model = YOLO("bestSon.pt")
 
-# Tespit edilen taşları saklamak için set 
+# Tespit edilen taşları saklamak için set ve LİSTE (sıralı)
 detected_pieces = set()
+detected_pieces_list = []
 
 # Hamleleri sırayla tutmak için liste
 moves = []
@@ -144,7 +146,9 @@ while True:
             if not moves or move != moves[-1]:
                 moves.append(move)
                 for piece in move:
-                    detected_pieces.add(piece)
+                    if piece not in detected_pieces:
+                        detected_pieces.add(piece)
+                        detected_pieces_list.append(piece)
                 print("Hamle kaydedildi!", move)
                 cv2.putText(warped, "HAMLE KAYDEDILDI!", (SIDE//2 - 120, 40),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
@@ -152,26 +156,72 @@ while True:
                 cv2.waitKey(500)
             else:
                 print("Aynı hamle tekrar kaydedilmedi.")
+    elif key == 8:  # Backspace tuşu ile hamle geri alma
+        if moves:
+            last_move = moves.pop()
+            print("Son hamle geri alındı!", last_move)
+            # detected_pieces_list'ten de son eklenen taşları çıkar
+            for piece in last_move:
+                if piece in detected_pieces_list:
+                    detected_pieces_list.remove(piece)
+            # detected_pieces setini de güncelle
+            detected_pieces.clear()
+            for move in moves:
+                for piece in move:
+                    detected_pieces.add(piece)
+            cv2.putText(warped, "HAMLE GERi ALINDI!", (SIDE//2 - 120, 40),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+            cv2.imshow("♟️ Satranç Tanıma + Grid", warped)
+            cv2.waitKey(500)
+        else:
+            print("Geri alınacak hamle yok.")
 
-# Program sonunda hamleleri satranç maçlarındaki gibi yazdır
-print("\nHamleler:")
-# Her hamlede sadece değişen taşları ve kareleri göster
-for i in range(0, len(moves), 2):
-    white = ''
-    black = ''
-    if i < len(moves):
-        # Sadece ilk hamledeki taşları göster
-        white_moves = [piece.split('_')[1] for piece in moves[i]]
-        white = ' '.join(white_moves)
-    if i+1 < len(moves):
-        black_moves = [piece.split('_')[1] for piece in moves[i+1]]
-        black = ' '.join(black_moves)
-    print(f"{i//2+1}. {white} {black}")
+# Program sonunda tespit edilen taşları eklenme sırasına göre 2'li notasyon gibi yazdır
+print("\nTespit Edilen Taşlar (Notasyon Gibi):")
+detected_list = detected_pieces_list  # Sıralı liste
+for i in range(0, len(detected_list), 2):
+    first = detected_list[i] if i < len(detected_list) else ''
+    second = detected_list[i+1] if i+1 < len(detected_list) else ''
+    print(f"{i//2+1}. {first}-{second}")
 
-# Program sonunda tespit edilen taşları yazdır
-print("\nTespit Edilen Taşlar:")
-for piece in sorted(detected_pieces):
-    print(piece)
+# --- Açılış tespiti ---
+# Sadece kare notasyonlarını sırayla al (taş tipiyle birlikte satranç notasyonu üret)
+def get_chess_notation(piece_str):
+    # Örn: white_bishop_f4 -> Bf4, black_knight_c6 -> Nc6, white_pawn_d4 -> d4
+    try:
+        color, piece, square = piece_str.split('_')
+    except ValueError:
+        return piece_str  # Hatalı format
+    piece_map = {
+        'pawn': '',
+        'knight': 'N',
+        'bishop': 'B',
+        'rook': 'R',
+        'queen': 'Q',
+        'king': 'K',
+    }
+    return f"{piece_map.get(piece, '?')}{square}"
+
+opening_moves = []
+for i in range(0, len(detected_pieces_list), 2):
+    first = detected_pieces_list[i] if i < len(detected_pieces_list) else ''
+    second = detected_pieces_list[i+1] if i+1 < len(detected_pieces_list) else ''
+    if first:
+        move1 = get_chess_notation(first)
+        opening_moves.append(move1)
+    if second:
+        move2 = get_chess_notation(second)
+        opening_moves.append(move2)
+# Açılış veri tabanı (import openings)
+from openings import openings
+found = False
+for seq, name in openings.items():
+    if tuple(opening_moves[:len(seq)]) == seq:
+        print(f"Açılış: {name}")
+        found = True
+        break
+if not found:
+    print("Açılış tanımlanamadı.")
 
 # Temizlik
 cap.release()
