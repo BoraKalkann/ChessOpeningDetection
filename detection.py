@@ -46,10 +46,10 @@ def get_square_position(x, y, cell_size):
 
 cap = cv2.VideoCapture(2)
 if not cap.isOpened():
-    print("Kameraya erişilemiyor.")
+    print("Camera did not Found!")
     exit()
 
-print("📌 Tahtanın 4 köşesini sırayla tıklayın: [Sol Üst, Sağ Üst, Sağ Alt, Sol Alt]")
+print("Click on the 4 corners of the board in order: First Top Left, Top Right, Bottom Right, and finally Bottom Left.")
 
 points = []
 
@@ -64,10 +64,10 @@ while not frame_ready:
     if ret and frame is not None:
         frame_ready = True
     else:
-        print("📷 Kamera görüntüsü bekleniyor...")
+        print("Waiting for Camera...")
 
 
-window_name = "Kose Secimi"
+window_name = "Corner Selection"
 cv2.namedWindow(window_name)
 cv2.setMouseCallback(window_name, select_corner)
 
@@ -87,14 +87,12 @@ while True:
 
 cv2.destroyWindow(window_name)
 
-# 2️⃣ PERSPEKTİF DÖNÜŞÜMÜ
 SIDE = 480  
 src = np.array(points, dtype="float32")
 dst = np.array([[0, 0], [SIDE, 0], [SIDE, SIDE], [0, SIDE]], dtype="float32")
 matrix = cv2.getPerspectiveTransform(src, dst)
 
-# 3️⃣ ALGILAMA VE GRID ÇİZİMİ
-print("🎥 Tanıma başladı. 'q' tuşu ile çıkabilirsiniz.")
+print("You can exit the program by pressing 'q' key.")
 
 while True:
     ret, frame = cap.read()
@@ -110,10 +108,9 @@ while True:
         confs = boxes.conf.cpu().numpy()
         classes = boxes.cls.cpu().numpy()
         
-        # Non-maximum suppression uygula
+        # Non-maximum suppression (TTT)
         selected_indices = []
         for cls in np.unique(classes):
-            # Her sınıf için ayrı NMS
             cls_mask = classes == cls
             cls_boxes = coords[cls_mask]
             cls_scores = confs[cls_mask]
@@ -177,14 +174,14 @@ while True:
 
     
     y_offset = 30
-    cv2.putText(warped, "Tespit Edilen Taslar:", (10, y_offset),
+    cv2.putText(warped, "Detected Pieces:", (10, y_offset),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
     for idx, piece in enumerate(sorted(detected_pieces)):
         y_pos = y_offset + (idx + 1) * 20
         cv2.putText(warped, piece, (10, y_pos),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
 
-    cv2.imshow("♟️ Satranç Tanıma + Grid", warped)
+    cv2.imshow("Chess Detection + Grid", warped)
 
     key = cv2.waitKey(1) & 0xFF
     if key == ord('q'):
@@ -200,13 +197,13 @@ while True:
                     if piece not in detected_pieces:
                         detected_pieces.add(piece)
                         detected_pieces_list.append(piece)
-                print("Hamle kaydedildi!", move)
-                cv2.putText(warped, "HAMLE KAYDEDILDI!", (SIDE//2 - 120, 40),
+                print("Move Saved!", move)
+                cv2.putText(warped, "MOVE SAVED!", (SIDE//2 - 120, 40),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
-                cv2.imshow("♟️ Satranç Tanıma + Grid", warped)
+                cv2.imshow("♟️ Chess Detection + Grid", warped)
                 cv2.waitKey(500)
             else:
-                print("Aynı hamle tekrar kaydedilmedi.")
+                print("Same move did not saved!.")
     elif key == ord('a'): 
         opening_moves = []
         for i in range(0, len(detected_pieces_list), 2):
@@ -219,7 +216,7 @@ while True:
                 move2 = get_chess_notation(second)
                 opening_moves.append(move2)        
         found = False
-        opening_name = "Açılış tanımlanamadı"
+        opening_name = "Opening did not found"
         max_match_length = 0
         
         for seq, name in openings.items():
@@ -231,13 +228,12 @@ while True:
         
         popup = np.zeros((400, 600, 3), dtype=np.uint8)
        
-        cv2.putText(popup, "Tespit Edilen Acilis:", (20, 40),
+        cv2.putText(popup, "Detected Opening:", (20, 40),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.8, (100, 100, 255), 2)
         cv2.putText(popup, opening_name, (20, 100),
                     cv2.FONT_HERSHEY_SIMPLEX, 1.2, (255, 255, 255), 2)
                     
-        # Tespit edilen taşları ekle
-        cv2.putText(popup, "Tespit Edilen Taslar:", (20, 160),
+        cv2.putText(popup, "Detected Pieces:", (20, 160),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.8, (100, 100, 255), 2)
         y_offset = 200
         for i in range(0, len(detected_pieces_list), 2):
@@ -248,9 +244,9 @@ while True:
                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 1)
             y_offset += 30
             
-        popup_window = "Tespit Edilen Açılış ve Taşlar"
+        popup_window = "Detected Openings and Pieces"
         cv2.imshow(popup_window, popup)
-        cv2.waitKey(5000)  # 5 saniye göster
+        cv2.waitKey(5000)  
         try:
             cv2.destroyWindow(popup_window)
         except cv2.error:
@@ -258,7 +254,7 @@ while True:
     elif key == 8:  
         if moves:
             last_move = moves.pop()
-            print("Son hamle geri alındı!", last_move)
+            print("Last move was reversed", last_move)
             
             for piece in last_move:
                 if piece in detected_pieces_list:
@@ -268,22 +264,22 @@ while True:
             for move in moves:
                 for piece in move:
                     detected_pieces.add(piece)
-            cv2.putText(warped, "HAMLE GERi ALINDI!", (SIDE//2 - 120, 40),
+            cv2.putText(warped, "MOVE REVERSED!", (SIDE//2 - 120, 40),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
-            cv2.imshow("♟️ Satranç Tanıma + Grid", warped)
+            cv2.imshow("Satranç Tanıma + Grid", warped)
             cv2.waitKey(500)
         else:
             print("Geri alınacak hamle yok.")
 
 
 print("\nTespit Edilen Taşlar :")
-detected_list = detected_pieces_list  # Sıralı liste
+detected_list = detected_pieces_list  
 for i in range(0, len(detected_list), 2):
     first = detected_list[i] if i < len(detected_list) else ''
     second = detected_list[i+1] if i+1 < len(detected_list) else ''
     print(f"{i//2+1}. {first}-{second}")
 
-# --- Açılış tespiti ---
+
 
 def get_chess_notation(piece_str):
    
@@ -316,11 +312,11 @@ from openings import openings
 found = False
 for seq, name in openings.items():
     if tuple(opening_moves[:len(seq)]) == seq:
-        print(f"Açılış: {name}")
+        print(f"Opening: {name}")
         found = True
         break
 if not found:
-    print("Açılış tanımlanamadı.")
+    print("Opening could not be identified.")
 
 
 cap.release()
