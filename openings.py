@@ -1,5 +1,5 @@
 openings = {
-    # 1. e4 açilişlari    
+    # 1. e4 openings  
     ('e4', 'e5', 'Nf3', 'Nc6', 'Bc4', 'Bc5'): "Italian Opening (Giuoco Piano)",
     ('e4', 'e5', 'Nf3', 'Nc6', 'Bb5'): "Ruy Lopez",
     ('e4', 'e5', 'Nf3', 'Nc6', 'Bb5', 'a6'): "Ruy Lopez: Morphy Defense",
@@ -54,7 +54,7 @@ openings = {
     ('c4', 'g6'): "English Opening: King's Indian Defense",
     ('c4', 'e4'): "English Opening: Bremen System",
 
-    # 1. Nf3 açılışları
+    # 1. Nf3 openings
     ('Nf3',): "Réti Opening",
     ('Nf3', 'd5'): "Réti: King's Indian Attack",
     ('Nf3', 'Nf6'): "Réti: Symmetrical Variation",
@@ -66,7 +66,7 @@ openings = {
     ('Nf3', 'c6'): "Réti: Slav Setup",
     ('Nf3', 'e6'): "Réti: Queen's Indian Setup",
 
-    # Diğer açılışlar
+    # Other openings
     ('g3',): "King's Fianchetto Opening",
     ('b3',): "Larsen's Opening",
     ('f4',): "Bird's Opening",
@@ -78,7 +78,7 @@ openings = {
     ('g4',): "Grob Opening",
     ('f3',): "Barnes Opening",
 
-    # Modern sistemler
+    # Modern Systems
     ('c4', 'e5', 'Nc3', 'Nf6', 'g3'): "Botvinnik System",
     ('d4', 'Nf6', 'c4', 'g6', 'Nc3', 'd5', 'Nf3'): "Neo-Grünfeld Defense",
     ('d4', 'Nf6', 'c4', 'e6', 'Nf3', 'b6', 'g3'): "Queen's Indian: Fianchetto",
@@ -90,28 +90,28 @@ openings = {
     ('e4', 'e5', 'Nf3', 'Nc6', 'Bb5', 'a6', 'Ba4', 'Nf6', 'O-O'): "Ruy Lopez: Closed",
     ('d4', 'd5', 'c4', 'e6', 'Nc3', 'Nf6', 'Bg5', 'Be7'): "QGD: Classical Variation",
 
-    # Hypermodern açılışlar
+    # Hypermodern Openings
     ('g3', 'd5', 'Bg2'): "King's Indian Attack",
     ('Nf3', 'd5', 'g3'): "Reti: King's Indian Attack",
     ('c4', 'Nf6', 'g3'): "English: King's Indian Setup",
     ('g3', 'e5', 'Bg2'): "King's Indian Attack: Reversed Sicilian",
     ('Nf3', 'c5', 'c4'): "English: Four Knights System",
 
-    # Gambit sistemleri
+    # Gambit Systems
     ('e4', 'e5', 'f4', 'exf4'): "King's Gambit Accepted",
     ('d4', 'd5', 'c4', 'c6', 'Nf3', 'Nf6', 'Nc3', 'dxc4'): "Slav Gambit",
     ('e4', 'e5', 'Nf3', 'Nc6', 'Bc4', 'Bc5', 'b4'): "Evans Gambit",
     ('d4', 'd5', 'c4', 'e6', 'Nc3', 'Nf6', 'Bg5', 'Nbd7'): "QGD: Cambridge Springs",
     ('e4', 'e5', 'Nf3', 'Nc6', 'd4', 'exd4'): "Scotch Gambit",
 
-    # Modern savunma sistemleri
+    # Modern defence systems
     ('e4', 'g6', 'd4', 'Bg7'): "Modern Defense: Main Line",
     ('d4', 'g6', 'e4', 'Bg7'): "Modern Defense: Averbakh System",
     ('e4', 'c6', 'd4', 'd5', 'Nc3', 'dxe4', 'Nxe4'): "Caro-Kann: Classical",
     ('e4', 'e6', 'd4', 'd5', 'Nd2'): "French: Tarrasch",
     ('d4', 'Nf6', 'c4', 'e6', 'Nf3', 'b6', 'a3'): "Queen's Indian: Petrosian System",
 
-    # Deneysel açılışlar
+    # Experimental openings
     ('Na3',): "Sodium Attack",
     ('Nh3',): "Amar Opening",
     ('f3', 'e5', 'Kf2'): "Barnes Opening: Fool's Mate Defense",
