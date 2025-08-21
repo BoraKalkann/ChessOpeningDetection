@@ -104,11 +104,12 @@
    
 
    Special thanks to :
-  - My Professor Taner TUNCER for his knowledge and advices that he gave throughout the project,
+  - My University Professor Taner TUNCER for his knowledge and advices that he gave throughout the project,
   - Yusuf Cinar for the model training helps that he provided,
   - For my Universty teacher Taha Kubilay SENER for the Non-Maximum Suprassion advice,
   - And last but not least my project partner Kadir Berke Koksal for his great efforts.
    
+
 
 
 
