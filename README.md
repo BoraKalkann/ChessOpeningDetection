@@ -1,4 +1,4 @@
-   ♟️ Real-Time Chess Move Tracker
+   ♟️ CHESS OPENING DETECTOR 
    
    📖 About the Project
    This project uses YOLOv8 to detect chess pieces in real-time and track moves on a physical chessboard. The system records moves and matches them against known openings to display the identified opening.
@@ -86,7 +86,7 @@
    exist_ok=True
    ```
 
-   WARNİNG! DO NOT FORGET TO UPDATE THE DATA.YAML 
+   WARNING! DO NOT FORGET TO UPDATE THE DATA.YAML 
    <img width="1320" height="325" alt="image" src="https://github.com/user-attachments/assets/ee0abbd1-492a-484f-86ef-2ce89052dc0c" />
    In this section, it's crucial to provide the paths to the train, val, and test image files, otherwise learning won't begin.
    After training, a best.pt extension containing the best weights is generated.
@@ -104,6 +104,7 @@
 
    Thank you for your interest and God bless.
    If you couldn't find a good dataset God may have mercy on your soul...
+
 
 
 
