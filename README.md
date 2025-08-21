@@ -43,7 +43,7 @@
   Detected moves and openings displayed in a popup window
 
  How To Make It:
-  First you have to download DroidCam.(You can download the application from playstore)
+- First you have to download DroidCam.(You can download the application from playstore)
   Then you have to do some settings work to use your phone as a webcam(You can find the information on the internet.)
   Once you completed that make sure you have the correct webcam (cap = cv2.VideoCapture(2) it can be 0 1 or 2. For me it's 2.)
   The important part is what chess board you are going to use and which dataset your model is going to be trained on.
@@ -109,6 +109,7 @@
   - For my Universty teacher Taha Kubilay SENER for the Non-Maximum Suprassion advice,
   - And last but not least my project partner Kadir Berke Koksal for his great efforts.
    
+
 
 
 
