@@ -9,22 +9,22 @@
     Detect and display chess openings visually
    
    ⚡ Features:
-   🎥 Real-time piece detection
-   📝 Record moves in standard chess notation (e.g., Nf3, e4)
-   ⏮️ Undo and replay moves
-   📚 Recognize known chess openings
-   🖼 Manual board corner selection and grid visualization
-   💡 User-friendly visual feedback
+   - 🎥 Real-time piece detection
+   - 📝 Record moves in standard chess notation (e.g., Nf3, e4)
+   - ⏮️ Undo and replay moves
+   - 📚 Recognize known chess openings
+   - 🖼 Manual board corner selection and grid visualization
+   - 💡 User-friendly visual feedback
    
    🛠 Requirements:
-   ultralytics 
-   torch 
-   torchvision 
-   opencv-python
-   numpy 
-   matplotlib 
-   pyyaml
-   droidcam
+   -ultralytics 
+   -torch 
+   -torchvision 
+   -opencv-python
+   -numpy 
+   -matplotlib 
+   -pyyaml
+   -droidcam
 
 
 
@@ -102,6 +102,7 @@
 
    Thank you for your interest and God bless.
    If you couldn't find a good dataset God may have mercy on your soul...
+
 
 
 
