@@ -17,14 +17,14 @@
    - 💡 User-friendly visual feedback
    
    🛠 Requirements:
-   -ultralytics 
-   -torch 
-   -torchvision 
-   -opencv-python
-   -numpy 
-   -matplotlib 
-   -pyyaml
-   -droidcam
+   - ultralytics 
+   - torch 
+   - torchvision 
+   - opencv-python
+   - numpy 
+   - matplotlib 
+   - pyyaml
+   - droidcam
 
 
 
@@ -102,6 +102,7 @@
 
    Thank you for your interest and God bless.
    If you couldn't find a good dataset God may have mercy on your soul...
+
 
 
 
