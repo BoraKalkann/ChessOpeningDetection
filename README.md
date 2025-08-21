@@ -64,7 +64,8 @@
   I trained the model in GoogleCollab for the soul reason to be more efficient.(and my PC is garbage)
   This is the code for the training process:
   
-  !pip install ultralytics
+   ```python
+   !pip install ultralytics
   import zipfile
   With
   zipfile.ZipFile('/content/Chess Piece detection v2.v1i.yolov8.zip', 'r') as zip_ref:
@@ -83,6 +84,7 @@
    project='/content/drive/MyDrive/yolov8_runs',
    name='chess_exp_aug',
    exist_ok=True
+   ```
 
    WARNİNG! DO NOT FORGET TO UPDATE THE DATA.YAML 
    <img width="1320" height="325" alt="image" src="https://github.com/user-attachments/assets/ee0abbd1-492a-484f-86ef-2ce89052dc0c" />
@@ -102,6 +104,7 @@
 
    Thank you for your interest and God bless.
    If you couldn't find a good dataset God may have mercy on your soul...
+
 
 
 
