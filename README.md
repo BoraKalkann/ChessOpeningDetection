@@ -99,6 +99,9 @@
 
    If you didn't get a good confidence score thats because of the dataset that you used. I do not have a another dataset for you to train but thats your job now.
 
+
+   You can watch my tutorial video ==> https://www.youtube.com/watch?v=waMxCgDs_28
+  
    Thank you for your interest and God bless.
    If you couldn't find a good dataset God may have mercy on your soul...
    
@@ -109,6 +112,7 @@
   - For my Universty teacher Taha Kubilay SENER for the Non-Maximum Suprassion advice,
   - And last but not least my project partner Kadir Berke Koksal for his great efforts.
    
+
 
 
 
